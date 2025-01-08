@@ -13,6 +13,7 @@ class Todo_list:
         print("3. Save Todo File")
         print("4. Mark Todo List as Complete")
         print("5. Load Todo File")
+        print("6  Delete Todo List")
 
         op = input("Choose Option 1 to 5:- ")
 
@@ -26,6 +27,8 @@ class Todo_list:
             self.mark()
         elif op == "5":
             self.load()
+        elif op == "6":
+            self.delete()
         else:
             print(colored("Invalid option, please try again.", "red"))
             self.menu()
@@ -97,5 +100,23 @@ class Todo_list:
             self.menu()
         except FileNotFoundError:
             print(colored("No saved todos found. Starting fresh.", "yellow"))
-
+            
+            
+    def delete(self):
+        self.display()
+        if not self.list:
+            return
+        try: 
+           index= int(input("Enter index number of task you want to delete:- "))
+           if 1 <= index <=len(self.list):
+               delete_task = self.list.pop(index-1)
+               print(colored("Delete Successfully!","green"))
+           else:
+              print(colored("Invalid Number","red"))
+        except ValueError:
+         print(colored("Please enter a valid number.", "red"))
+        self.menu()
+        
+                    
+        
 Todo_list()
